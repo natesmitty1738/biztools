@@ -1,0 +1,69 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Item {
+  id          String      @id @default(cuid())
+  title       String
+  description String
+  category    String
+  attributes  Json        @default("{}")
+  clicks      Int         @default(0)
+  lastClicked DateTime?
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  clickEvents ClickEvent[]
+}
+
+model ClickEvent {
+  id        String   @id @default(cuid())
+  itemId    String
+  item      Item     @relation(fields: [itemId], references: [id])
+  timestamp DateTime @default(now())
+  userId    String?  // Optional: for tracking user-specific recommendations
+  metadata  Json?    // Optional: for storing additional click context
+}
+
+model RecommendationModel {
+  id          String   @id @default(cuid())
+  version     Int      @default(1)
+  modelData   Json     // Store LLaMA embeddings or other model data
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  isActive    Boolean  @default(false)
+  metrics     Json?    // Store model performance metrics
+}
+
+model Customer {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  name          String
+  paymentMethod String?
+  active        Boolean   @default(true)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  invoices      Invoice[]
+}
+
+model Invoice {
+  id             String    @id @default(cuid())
+  customerId     String
+  customer       Customer  @relation(fields: [customerId], references: [id])
+  amount         Float
+  currency       String    @default("USD")
+  status         String    // open, paid, void
+  description    String?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  dueDate        DateTime
+  paidAt         DateTime?
+  billingPeriod  String    // monthly, quarterly, yearly
+} 

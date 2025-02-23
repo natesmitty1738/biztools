@@ -1,0 +1,399 @@
+.container {
+  padding: 2rem;
+  padding-top: 80px;
+  max-width: 1400px;
+  margin: 0 auto;
+  background: #000;
+  min-height: 100vh;
+  position: relative;
+}
+
+.container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background: linear-gradient(90deg, #4F46E5, #0EA5E9);
+  opacity: 0.1;
+  filter: blur(100px);
+  border-radius: 100%;
+  z-index: 0;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2.5rem;
+  position: relative;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: -0.025em;
+  background: linear-gradient(to right, #fff, rgba(255, 255, 255, 0.75));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.5rem;
+  font-weight: 500;
+  font-size: 0.9375rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, #4F46E5, #0EA5E9);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: 1;
+}
+
+.button:hover::before {
+  opacity: 0.2;
+}
+
+.button > * {
+  position: relative;
+  z-index: 2;
+}
+
+.buttonIcon {
+  font-size: 1.25rem;
+  line-height: 1;
+  margin-right: 0.25rem;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 0.75rem;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  position: relative;
+  backdrop-filter: blur(10px);
+}
+
+.card::before {
+  display: none;
+}
+
+.subtitle {
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin: 1.5rem;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.tableContainer {
+  overflow-x: auto;
+  margin: 0 -1px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.9375rem;
+  table-layout: fixed;
+}
+
+.table th,
+.table td {
+  padding: 1rem 1.5rem;
+  text-align: left;
+  color: #fff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Column widths */
+.table th:nth-child(1),
+.table td:nth-child(1) {
+  width: 15%;
+}
+
+.table th:nth-child(2),
+.table td:nth-child(2) {
+  width: 20%;
+}
+
+.table th:nth-child(3),
+.table td:nth-child(3) {
+  width: 12%;
+}
+
+.table th:nth-child(4),
+.table td:nth-child(4) {
+  width: 12%;
+}
+
+.table th:nth-child(5),
+.table td:nth-child(5) {
+  width: 15%;
+}
+
+.table th:nth-child(6),
+.table td:nth-child(6) {
+  width: 15%;
+}
+
+.table th:nth-child(7),
+.table td:nth-child(7) {
+  width: 11%;
+  padding-right: 1rem;
+  text-align: right;
+}
+
+.table th {
+  font-weight: 400;
+  color: #888;
+  background-color: transparent;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+}
+
+.table tr {
+  transition: background-color 0.2s ease;
+}
+
+.table tr:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.table tr:hover td::before {
+  display: none;
+}
+
+.actionButtons {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+  position: relative;
+}
+
+.menuButton {
+  padding: 0.5rem;
+  background: transparent;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  color: #888;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  opacity: 0;
+}
+
+.table tr:hover .menuButton {
+  opacity: 1;
+}
+
+.menuButton:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.menu {
+  position: absolute;
+  top: 0;
+  right: 100%;
+  margin-right: 0.5rem;
+  background: #1a1a1a;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.5rem;
+  padding: 0.25rem;
+  min-width: 160px;
+  z-index: 50;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  background: transparent;
+  border: none;
+  border-radius: 0.375rem;
+  color: #fff;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.menuItem:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.menuItem.delete {
+  color: #ef4444;
+}
+
+.menuItem.delete:hover {
+  background: rgba(239, 68, 68, 0.06);
+}
+
+.menuItem svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+
+.menuItem:hover svg {
+  opacity: 1;
+}
+
+/* Make sure the table cell containing the menu has the right positioning */
+.table td:last-child {
+  position: relative;
+  padding-right: 1rem;
+  min-width: 100px;
+}
+
+.iconButton {
+  display: none;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.625rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.4;
+  white-space: nowrap;
+  letter-spacing: 0.025em;
+}
+
+.badge::before {
+  display: none;
+}
+
+.paid {
+  background: rgba(16, 185, 129, 0.1);
+  color: #34D399;
+}
+
+.pending {
+  background: rgba(245, 158, 11, 0.1);
+  color: #FBBF24;
+}
+
+.amountCell {
+  font-family: "SF Mono", "Monaco", "Inconsolata", "Fira Mono", "Droid Sans Mono", "Source Code Pro", monospace;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: #fff;
+  background: linear-gradient(90deg, #fff, rgba(255, 255, 255, 0.75));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.dateCell {
+  color: #888;
+  font-size: 0.875rem;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  color: #888;
+  font-size: 0.875rem;
+  letter-spacing: 0.025em;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+  border-radius: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.loading::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 0.5rem;
+  padding: 1px;
+  background: linear-gradient(90deg, rgba(79, 70, 229, 0.15), rgba(14, 165, 233, 0.15));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.loading::after {
+  content: '';
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  margin-left: 0.5rem;
+  border: 2px solid transparent;
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.table td {
+  transition: background-color 0.2s ease;
+}
+
+.table td:first-child,
+.table th:first-child {
+  padding-left: 1.5rem;
+}
+
+.table td:last-child,
+.table th:last-child {
+  padding-right: 1.5rem;
+  text-align: right;
+}
+
+.table tr:hover .actionButtons {
+  opacity: 1;
+}
+
+.table tr:hover .actionButtons {
+  opacity: 1;
+} 

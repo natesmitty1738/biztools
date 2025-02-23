@@ -1,0 +1,61 @@
+Metadata-Version: 2.2
+Name: biztools-recommender
+Version: 0.1.0
+Summary: LLaMA-powered recommendation engine with Bloom filter optimization
+Home-page: https://github.com/yourusername/biztools
+Author: Your Name
+Author-email: your.email@example.com
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+Requires-Dist: numpy>=1.24.3
+Requires-Dist: scipy>=1.10.1
+Requires-Dist: scikit-learn>=1.3.2
+Requires-Dist: pandas>=2.1.2
+Provides-Extra: dev
+Requires-Dist: pytest>=7.4.3; extra == "dev"
+Requires-Dist: black>=23.3.0; extra == "dev"
+Requires-Dist: isort>=5.12.0; extra == "dev"
+Requires-Dist: mypy>=1.5.1; extra == "dev"
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: provides-extra
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+# BizTools Recommender
+
+A powerful recommendation engine combining LLaMA language model with Bloom filters for efficient and context-aware recommendations.
+
+## Features
+
+- Content-based recommendations using LLaMA
+- Efficient filtering with Bloom filters
+- Metal acceleration support for macOS
+- Real-time user interaction tracking
+- Similar item recommendations
+- Caching for improved performance
+
+## Installation
+
+```bash
+pip install -e .
+```
+
+## Requirements
+
+- Python 3.9+
+- LLaMA model (7B, 13B, 30B, or 65B)
+- CMake for building llama.cpp
+- Metal-capable GPU (for macOS) 

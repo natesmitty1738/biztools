@@ -1,0 +1,156 @@
+.navbar {
+  height: 64px;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: min(300px, 100vw);
+  min-width: 250px;
+  z-index: 100;
+}
+
+.navContent {
+  max-width: 1400px;
+  margin: 0 auto;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+}
+
+.navLeft {
+  display: none;
+}
+
+.navCenter {
+  flex: 1;
+  max-width: 600px;
+  margin: 0 24px;
+}
+
+.searchButton {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: #888;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.searchButton:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.searchIcon {
+  width: 16px;
+  height: 16px;
+  opacity: 0.7;
+}
+
+.searchShortcut {
+  margin-left: auto;
+  padding: 2px 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  font-size: 0.75rem;
+  color: #888;
+}
+
+.searchContainer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+}
+
+.searchInput {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 0.875rem;
+  outline: none;
+}
+
+.searchInput::placeholder {
+  color: #888;
+}
+
+.closeSearch {
+  background: transparent;
+  border: none;
+  color: #888;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.closeSearch:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.githubLink {
+  color: #888;
+  padding: 8px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.githubLink:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.mobileMenuButton {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    left: 0;
+  }
+
+  .navLeft {
+    display: block;
+  }
+
+  .mobileMenuButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    color: #888;
+    padding: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .mobileMenuButton:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+  }
+} 

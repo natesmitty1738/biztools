@@ -1,0 +1,35 @@
+# BizTools Automated Billing Configuration
+# This file configures the automated billing system including email settings,
+# company information, and customer billing details.
+
+# Email server configuration for sending invoices
+email_settings:
+  smtp_server: smtp.gmail.com     # SMTP server address
+  smtp_port: 587                  # SMTP port (587 for TLS, 465 for SSL)
+  sender_email: your-email@gmail.com  # Your email address
+  smtp_password: your-app-password    # App-specific password (recommended for Gmail)
+
+# Company information for invoice generation
+invoice_settings:
+  company_name: Your Company Name     # Your business name
+  company_address: Your Company Address  # Full business address
+  company_logo: path/to/logo.png     # Path to company logo (optional)
+  currency: USD                      # Invoice currency code
+  payment_terms: Net 30              # Payment terms to show on invoice
+
+# Customer billing configurations
+# Each customer can have different billing frequencies and days
+customers:
+  # Example monthly customer
+  - name: John Doe                   # Customer's full name
+    email: john@example.com          # Customer's email address
+    billing_amount: 99.99            # Amount to charge
+    billing_frequency: monthly       # Frequency: monthly, quarterly, yearly
+    billing_day: 1                   # Day of month to send invoice (1-31)
+    
+  # Example quarterly customer
+  - name: Jane Smith
+    email: jane@example.com
+    billing_amount: 499.99
+    billing_frequency: quarterly     # Bills on 1st of Jan, Apr, Jul, Oct
+    billing_day: 15                  # Day of month to send invoice (1-31) 
