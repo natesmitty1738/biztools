@@ -3,7 +3,10 @@
 import { useState } from 'react'
 import { Item } from '@prisma/client'
 import { RecommendationList } from '@/components/recommender/RecommendationList'
-import { FiSearch, FiRefreshCw } from 'react-icons/fi'
+import { FiSearch, FiRefreshCw, FiPlus } from 'react-icons/fi'
+import PageLayout from '@/components/PageLayout'
+import { PageSection, PageSectionGrid } from '@/components/PageSection'
+import styles from './recommender.module.css'
 
 export default function RecommenderPage() {
   const [items, setItems] = useState<Item[]>([])
@@ -28,81 +31,72 @@ export default function RecommenderPage() {
       const data = await response.json()
       setItems(data)
     } catch (err) {
-      setError('Failed to fetch recommendations. Please try again.')
-      console.error('Error fetching recommendations:', err)
+      setError('An error occurred while fetching recommendations')
+      console.error(err)
     } finally {
       setLoading(false)
     }
   }
 
-  const handleItemClick = async (item: Item) => {
-    try {
-      await fetch(`/api/recommendations/click`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ itemId: item.id }),
-      })
-    } catch (err) {
-      console.error('Error recording click:', err)
-    }
+  const handleItemClick = (item: Item) => {
+    console.log('Item clicked:', item)
+    // Additional logic to handle item click if needed
   }
 
   return (
-    <div className="container relative pt-80">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-4">
-          Product Recommendations
-        </h1>
-        <p className="text-gray-600 mb-6">
-          Discover products tailored to your needs using our AI-powered recommendation system.
-        </p>
-
-        <div className="flex gap-4 mb-6">
-          <div className="flex-1">
-            <div className="relative">
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
-                placeholder="Describe what you're looking for..."
-                className="w-full px-4 py-2 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-              <FiSearch className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-            </div>
-          </div>
-          <button
-            onClick={handleSearch}
-            disabled={loading}
-            className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 flex items-center gap-2"
-          >
-            {loading ? (
-              <>
-                <FiRefreshCw className="animate-spin" />
-                Searching...
-              </>
-            ) : (
-              'Search'
-            )}
+    <PageLayout 
+      title="Recommender System" 
+      description="Generate and manage product recommendations for your customers"
+      breadcrumbs={[
+        { label: 'Dashboard', href: '/' },
+        { label: 'Recommender' }
+      ]}
+      actions={
+        <button 
+          className={styles.actionButton}
+          onClick={() => alert('Add item functionality to be implemented')}
+        >
+          <FiPlus size={18} />
+          <span>Add Item</span>
+        </button>
+      }
+    >
+      <PageSection
+        title="Search Recommendations"
+        description="Find recommendations based on a query or user profile"
+      >
+        <div className={styles.searchContainer}>
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Enter a search query..."
+            className={styles.searchInput}
+            onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
+          />
+          <button className={styles.searchButton} onClick={handleSearch} disabled={loading}>
+            {loading ? <FiRefreshCw className={styles.spinIcon} /> : <FiSearch />}
+            <span>{loading ? 'Searching...' : 'Search'}</span>
           </button>
         </div>
+        
+        {error && <div className={styles.error}>{error}</div>}
+      </PageSection>
 
-        {error && (
-          <div className="p-4 mb-6 bg-red-50 border border-red-200 rounded-lg text-red-700">
-            {error}
+      <PageSection title="Recommendations">
+        {loading ? (
+          <div className={styles.loading}>
+            <FiRefreshCw className={styles.spinIcon} />
+            <span>Generating recommendations...</span>
+          </div>
+        ) : items.length > 0 ? (
+          <RecommendationList items={items} onItemClick={handleItemClick} />
+        ) : (
+          <div className={styles.emptyState}>
+            <p>No recommendations found. Try a different search query or add more items to your catalog.</p>
           </div>
         )}
-      </div>
-
-      {items.length > 0 ? (
-        <RecommendationList items={items} onItemClick={handleItemClick} />
-      ) : !loading && (
-        <div className="text-center py-12 text-gray-500">
-          Enter a search query to get personalized recommendations
-        </div>
-      )}
-    </div>
+      </PageSection>
+    </PageLayout>
   )
 } 

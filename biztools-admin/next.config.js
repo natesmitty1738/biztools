@@ -17,13 +17,13 @@ const nextConfig = {
 
     return config;
   },
-  // Increase API response timeout for model inference
-  api: {
-    responseLimit: '100mb',
-    bodyParser: {
-      sizeLimit: '100mb',
-    },
-  },
+  // Increase response size limits
+  experimental: {
+    serverComponentsExternalPackages: ["sharp"],
+    serverActions: {
+      bodySizeLimit: '100mb',
+    }
+  }
 };
 
 module.exports = nextConfig; 

@@ -3,7 +3,9 @@
 import { useState, useEffect, useRef } from 'react'
 import styles from './billing.module.css'
 import CreateInvoiceModal from '@/components/billing/CreateInvoiceModal'
-import { FiMoreVertical, FiTrash2, FiEye, FiEdit } from 'react-icons/fi'
+import { FiMoreVertical, FiTrash2, FiEye, FiEdit, FiPlus } from 'react-icons/fi'
+import PageLayout from '@/components/PageLayout'
+import { PageSection } from '@/components/PageSection'
 
 interface Invoice {
   id: string
@@ -100,22 +102,25 @@ export default function BillingPage() {
   }, [activeMenu])
 
   return (
-    <div className={styles.container} style={{ background: '#000' }}>
-      <div className={styles.header}>
-        <h1 className={styles.title}>Billing</h1>
+    <PageLayout
+      title="Billing & Invoices"
+      description="Manage your billing information, invoices, and payment methods."
+      breadcrumbs={[
+        { label: 'Dashboard', href: '/' },
+        { label: 'Billing' }
+      ]}
+      actions={
         <button 
           className={styles.button}
           onClick={() => setIsCreateModalOpen(true)}
         >
-          <span className={styles.buttonIcon}>+</span>
-          New Invoice
+          <FiPlus size={18} />
+          <span>New Invoice</span>
         </button>
-      </div>
-
-      <div className={styles.card} style={{ background: 'rgba(255, 255, 255, 0.02)' }}>
-        <h2 className={styles.subtitle}>Invoices</h2>
-        
-        <div className={styles.tableContainer} style={{ background: '#000' }}>
+      }
+    >
+      <PageSection title="Invoices">
+        <div className={styles.tableContainer}>
           {isLoading ? (
             <div className={styles.loading}>Loading invoices...</div>
           ) : (
@@ -197,7 +202,7 @@ export default function BillingPage() {
             </table>
           )}
         </div>
-      </div>
+      </PageSection>
 
       {isCreateModalOpen && (
         <CreateInvoiceModal 
@@ -206,6 +211,6 @@ export default function BillingPage() {
           onSuccess={handleInvoiceCreated}
         />
       )}
-    </div>
+    </PageLayout>
   )
 } 

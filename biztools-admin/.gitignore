@@ -42,3 +42,14 @@ next-env.d.ts
 
 # Docker
 /postgres_data
+
+# Search indexes
+/data
+/data/search_index*
+*.faiss
+*.index
+search_index*
+
+# Temporary files
+/tmp
+/.cache
